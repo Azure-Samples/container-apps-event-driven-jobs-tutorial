@@ -1,0 +1,16 @@
+{
+  "name": "event-driven-job-sample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@azure/storage-queue": "^12.13.0",
+    "dotenv": "^16.0.3"
+  }
+}
