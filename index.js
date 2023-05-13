@@ -8,23 +8,27 @@ async function main() {
     const queueServiceClient = QueueServiceClient.fromConnectionString(connectionString);
     const queueClient = queueServiceClient.getQueueClient(queueName);
     
+    // 1. Dequeue one message from the queue
     const response = await queueClient.receiveMessages({
         numberOfMessages: 1,
         visibilityTimeout: 60, // set this to longer than the expected processing time (in seconds)
     });
 
     if (response.receivedMessageItems.length === 0) {
-        console.log("No messages received. Exiting...");
+        console.log("No message received. Exiting...");
         return;
     }
 
     const message = response.receivedMessageItems[0];
     console.log(`Processing message: ${message.messageText}`);
 
-    // process the message here
+    // 2. Process the message here
 
+    // 3. Delete the message from the queue
     await queueClient.deleteMessage(message.messageId, message.popReceipt);
     console.log("Message processed");
+
+    // 4. Exit
 }
 
 main();
