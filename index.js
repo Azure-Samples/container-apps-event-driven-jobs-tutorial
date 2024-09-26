@@ -1,12 +1,12 @@
 require("dotenv").config();
 const { QueueClient, QueueServiceClient } = require("@azure/storage-queue");
+const { DefaultAzureCredential } = require('@azure/identity');
 
-const connectionString = process.env.AZURE_STORAGE_CONNECTION_STRING;
-const queueName = process.env.AZURE_STORAGE_QUEUE_NAME;
+const storageAccountName = process.env.AZURE_STORAGE_ACCOUNT_NAME;
+const queueName = process.env.AZURE_STORAGE_QUEUE_NAME || "myqueue";
 
 async function main() {
-    const queueServiceClient = QueueServiceClient.fromConnectionString(connectionString);
-    const queueClient = queueServiceClient.getQueueClient(queueName);
+    const queueClient = new QueueClient(`https://${storageAccountName}.queue.core.windows.net/${queueName}`, new DefaultAzureCredential());
     
     // 1. Dequeue one message from the queue
     const response = await queueClient.receiveMessages({
