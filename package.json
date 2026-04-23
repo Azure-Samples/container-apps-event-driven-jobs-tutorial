@@ -10,7 +10,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@azure/storage-queue": "^12.13.0",
+    "@azure/storage-queue": "^12.29.0",
     "dotenv": "^16.0.3"
   }
 }
